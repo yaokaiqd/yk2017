@@ -1,0 +1,75 @@
+<!DOCTYPE>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 01</title>
+  </head>
+<body>
+
+  <ul id="source">
+    <li>北京空气质量：<b>90</b></li>
+    <li>上海空气质量：<b>70</b></li>
+    <li>天津空气质量：<b>80</b></li>
+    <li>广州空气质量：<b>50</b></li>
+    <li>深圳空气质量：<b>40</b></li>
+    <li>福州空气质量：<b>32</b></li>
+    <li>成都空气质量：<b>90</b></li>
+  </ul>
+
+  <ul id="resort">
+    <!-- 
+    <li>第一名：北京空气质量：<b>90</b></li>
+    <li>第二名：北京空气质量：<b>90</b></li>
+    <li>第三名：北京空气质量：<b>90</b></li>
+     -->
+
+  </ul>
+
+  <button id="sort-btn">排序</button>
+
+<script type="text/javascript">
+function getData() {
+var sum=document.getElementById("source");
+var data=[];
+for(var i=0;i<sum.childElementCount;i++){
+	var sum2=sum.children[i];
+	var sum1=sum2.innerHTML.split("空气质量：")[0];
+	var sum3=Number(sum2.children[0].innerHTML);
+	data.push([sum1,sum3]);
+}
+  return data;
+}
+function sortAqiData(data) {
+  data.sort(function(value1,value2){
+  	return value1[1]-value2[1];
+  });
+  return data;
+}
+function render(data) {
+  var sum4=document.getElementById("resort");
+  var sum5="";
+  for(var i=0;i<data.length;i++){
+  	var sum6=data[i];
+  	sum5+="<li>第"+(i+1)+"名："+sum6[0]+"的空气质量指数：<b>"+sum6[1]+"</b></li>";
+  }
+  sum4.innerHTML=sum5;
+}
+
+function btnHandle() {
+  var aqiData = getData();
+  aqiData = sortAqiData(aqiData);
+  render(aqiData);
+  var sum7=document.getElementById("sort-btn");
+  sum7.disabled=true;
+}
+
+function init() {
+  var sum7=document.getElementById("sort-btn");
+  sum7.onclick=btnHandle;
+}
+
+init();
+
+</script>
+</body>
+</html>
